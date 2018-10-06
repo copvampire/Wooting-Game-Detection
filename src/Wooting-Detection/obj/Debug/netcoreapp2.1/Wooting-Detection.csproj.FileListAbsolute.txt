@@ -1,0 +1,35 @@
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.deps.json
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.runtimeconfig.json
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.runtimeconfig.dev.json
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.dll
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.pdb
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.csprojAssemblyReference.cache
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.csproj.CoreCompileInputs.cache
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.AssemblyInfoInputs.cache
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.AssemblyInfo.cs
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.dll
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.pdb
+C:\Users\eddie\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\wootingrgb.dll
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.deps.json
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.runtimeconfig.json
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.runtimeconfig.dev.json
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.dll
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.pdb
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.csprojAssemblyReference.cache
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.csproj.CoreCompileInputs.cache
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.AssemblyInfoInputs.cache
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.AssemblyInfo.cs
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.dll
+C:\Users\Ed\ownCloud\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.pdb
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.deps.json
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.runtimeconfig.json
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.runtimeconfig.dev.json
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.dll
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\Wooting-Detection.pdb
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.csprojAssemblyReference.cache
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.csproj.CoreCompileInputs.cache
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.AssemblyInfoInputs.cache
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.AssemblyInfo.cs
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.dll
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\obj\Debug\netcoreapp2.1\Wooting-Detection.pdb
+D:\ownCloud - Storage\source\repos\Wooting-Detection\Wooting-Detection\bin\Debug\netcoreapp2.1\wootingrgb.dll
