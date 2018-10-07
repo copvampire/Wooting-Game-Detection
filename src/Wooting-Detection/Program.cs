@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Threading;
 using System.Text;
+using System.Linq;
 
 namespace Wooting_Detection
 {
@@ -29,9 +30,9 @@ namespace Wooting_Detection
             Console.WriteLine(Kbd_Connected());
             int chars = 256;
             int present = 0;
-            var Game1 = @"Forza Horizon 4";
-            var Game2 = @"The Crew 2";
-            var Game3 = @"Spotify";
+            string[] Game1 = { "Forza Horizon 4", "Forza Horizon 3" };
+            string[] Game2 = { "TheCrew2" };
+            string[] Game3 = { "Spotify" };
             int GameChange = 0;
 
             int countcol = 20;
@@ -49,15 +50,15 @@ namespace Wooting_Detection
                     Console.WriteLine(buff.ToString());
                 }
 
-                if (buff.ToString() == Game1)
+                if (Game1.Contains(buff.ToString()))
                 {
                     present = 1;
                 }
-                else if (buff.ToString() == Game2)
+                else if (Game2.Contains(buff.ToString()))
                 {
                     present = 2;
                 }
-                else if (buff.ToString() == Game3)
+                else if (Game3.Contains(buff.ToString()))
                 {
                     present = 3;
                 }
