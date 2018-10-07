@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -65,15 +66,16 @@ namespace Wooting_Game_Detection
 
 			wooting_rgb_send_feature(Feature_Reset, 0, 0, 0, 0); // use profile colors
 
-			Tuple<string, int>[] games = // string - window title, int - desired profile
-			{
-				new Tuple<string, int>("Forza Horizon 4", 1),
-				new Tuple<string, int>("Forza Horizon 3", 1),
-				new Tuple<string, int>("TheCrew2", 2),
-				new Tuple<string, int>("Spotify", 3),
-			};
+            var lines = File.ReadAllLines("config.ini");
 
-			int PreviousProfile = 0;
+            List<Tuple<string, int>> games = new List<Tuple<string, int>>();
+            foreach (var line in lines)
+            {
+                var splitted = line.Split(',');
+                games.Add(new Tuple<string, int>(splitted[0], Convert.ToInt32(splitted[1])));
+            }
+
+            int PreviousProfile = 0;
 
 			SetConsoleCtrlHandler(ConsoleCtrlHandler, true); // reset on exit
 
