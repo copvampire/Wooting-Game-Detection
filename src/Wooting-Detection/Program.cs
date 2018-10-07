@@ -32,6 +32,7 @@ namespace Wooting_Detection
             var Game1 = @"Forza Horizon 4";
             var Game2 = @"The Crew 2";
             var Game3 = @"Spotify";
+            int GameChange = 0;
 
             int countcol = 20;
             int countrow = 5;
@@ -68,63 +69,83 @@ namespace Wooting_Detection
                 switch (present)
                 {
                     case 1:
-                        Console.WriteLine("Switch profile 1");
-
-                        SwitchProfile(23, 0, 0, 0, 1);
-
-                        for (ic = 0; ic <= countcol; ic++)
+                        Console.WriteLine("Profile 1");
+                        if (!(GameChange == 1))
                         {
-                            SetKey(ir, ic, 0, 0, 255);
-                            for (ir = 0; ir <= countrow; ir++)
+                            Console.WriteLine("Switch profile 1");
+
+                            SwitchProfile(23, 0, 0, 0, 1);
+
+                            for (ic = 0; ic <= countcol; ic++)
                             {
                                 SetKey(ir, ic, 0, 0, 255);
+                                for (ir = 0; ir <= countrow; ir++)
+                                {
+                                    SetKey(ir, ic, 0, 0, 255);
+                                }
                             }
+                            GameChange = 1;
                         }
 
                         break;
                     case 2:
-                        Console.WriteLine("Switch profile 2");
-
-                        SwitchProfile(23, 0, 0, 0, 2);
-
-                        for (ic = 0; ic <= countcol; ic++)
+                        Console.WriteLine("Profile 2");
+                        if (!(GameChange == 2))
                         {
-                            SetKey(ir, ic, 255, 0, 0);
-                            for (ir = 0; ir <= countrow; ir++)
+                            Console.WriteLine("Switch profile 2");
+
+                            SwitchProfile(23, 0, 0, 0, 2);
+
+                            for (ic = 0; ic <= countcol; ic++)
                             {
                                 SetKey(ir, ic, 255, 0, 0);
+                                for (ir = 0; ir <= countrow; ir++)
+                                {
+                                    SetKey(ir, ic, 255, 0, 0);
+                                }
                             }
+                            GameChange = 2;
                         }
 
                         break;
                     case 3:
-                        Console.WriteLine("Switch profile 3");
-
-                        SwitchProfile(23, 0, 0, 0, 3);
-
-                        for (ic = 0; ic <= countcol; ic++)
+                        Console.WriteLine("Profile 3");
+                        if (!(GameChange == 3))
                         {
-                            SetKey(ir, ic, 0, 255, 0);
-                            for (ir = 0; ir <= countrow; ir++)
+                            Console.WriteLine("Switch profile 3");
+
+                            SwitchProfile(23, 0, 0, 0, 3);
+
+                            for (ic = 0; ic <= countcol; ic++)
                             {
                                 SetKey(ir, ic, 0, 255, 0);
+                                for (ir = 0; ir <= countrow; ir++)
+                                {
+                                    SetKey(ir, ic, 0, 255, 0);
+                                }
                             }
+                            GameChange = 3;
                         }
 
-                        break;
+                            break;
 
                     default:
-                        Console.WriteLine("Switch profile default");
-                        Console.WriteLine("Not Running");
-                        SwitchProfile(23, 0, 0, 0, 0);
-
-                        for (ic = 0; ic <= countcol; ic++)
+                        Console.WriteLine("Default Profile");
+                        if (!(GameChange == 0))
                         {
-                            SetKey(ir, ic, 255, 255, 255);
-                            for (ir = 0; ir <= countrow; ir++)
+                            Console.WriteLine("Switch profile default");
+                            Console.WriteLine("Not Running");
+                            SwitchProfile(23, 0, 0, 0, 0);
+
+                            for (ic = 0; ic <= countcol; ic++)
                             {
                                 SetKey(ir, ic, 255, 255, 255);
+                                for (ir = 0; ir <= countrow; ir++)
+                                {
+                                    SetKey(ir, ic, 255, 255, 255);
+                                }
                             }
+                            GameChange = 0;
                         }
 
                         break;
