@@ -1,4 +1,5 @@
 Wooting-Game-Detection
 
 This is a project I started to allow people to automatically swap profiles on application run.
-It is very eaily stages and will have many re-writes, it is no where near ready for use other than testing and improving on the code.
+
+To try out the code, you can simply download the the following files and add the games you wish to swap profiles for in the config.ini file and run! Simples!
