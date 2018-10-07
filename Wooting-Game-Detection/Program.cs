@@ -46,7 +46,9 @@ namespace Wooting_Game_Detection
 			CTRL_SHUTDOWN_EVENT
 		}
 
+		private const int Feature_LoadRgbProfile = 7;
 		private const int Feature_SwitchProfile = 23;
+		private const int Feature_Reset = 32;
 
 		private static bool ConsoleCtrlHandler(CtrlTypes Type)
 		{
@@ -60,6 +62,8 @@ namespace Wooting_Game_Detection
 		{
 			if (!wooting_rgb_kbd_connected())
 				return; // no keyboard
+
+			wooting_rgb_send_feature(Feature_Reset, 0, 0, 0, 0); // use profile colors
 
 			Tuple<string, int>[] games = // string - window title, int - desired profile
 			{
@@ -91,22 +95,7 @@ namespace Wooting_Game_Detection
 
 				Console.WriteLine($"Switch profile {DesiredProfile}");
 				wooting_rgb_send_feature(Feature_SwitchProfile, 0, 0, 0, DesiredProfile); // send the switch profile command to the keyboard
-
-				for (var Row = 0; Row < LayoutRows; Row++)
-				{
-					for (var Column = 0; Column < LayoutColumns; Column++)
-					{
-						// figure out the colors
-						// is there a better way to do this? brain died
-						var red = DesiredProfile == 1 || DesiredProfile == 0 ? (byte) 255 : (byte) 0;
-						var green = DesiredProfile == 2 || DesiredProfile == 0 ? (byte) 255 : (byte) 0;
-						var blue = DesiredProfile == 3 || DesiredProfile == 0 ? (byte) 255 : (byte) 0;
-
-						wooting_rgb_array_set_single((byte) Row, (byte) Column, red, green, blue); // set the color in a buffer
-					}
-				}
-
-				wooting_rgb_array_update_keyboard(); // update colors on keyboard 
+				wooting_rgb_send_feature(Feature_LoadRgbProfile, 0, 0, 0, DesiredProfile); // update colors on keyboard 
 
 				PreviousProfile = DesiredProfile;
 			}
