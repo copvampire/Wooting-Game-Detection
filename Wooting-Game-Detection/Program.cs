@@ -35,8 +35,14 @@ namespace Wooting_Game_Detection
 
 		[DllImport("kernel32.dll")]
 		public static extern bool SetConsoleCtrlHandler(HandlerRoutine Handler, bool State);
+        
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GetConsoleWindow();
 
-		public delegate bool HandlerRoutine(CtrlTypes CtrlType);
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr consoleWindow, int cmdShow);
+
+        public delegate bool HandlerRoutine(CtrlTypes CtrlType);
 
 		public enum CtrlTypes
 		{
@@ -61,7 +67,17 @@ namespace Wooting_Game_Detection
 
 		static void Main(string[] args)
 		{
-			if (!wooting_rgb_kbd_connected())
+            
+            Console.Title = "Wooting-Process-Detection";
+
+            IntPtr consoleWindow = GetConsoleWindow();
+
+            if (consoleWindow != IntPtr.Zero)
+            {
+                ShowWindow(consoleWindow, 0);
+            }
+
+            if (!wooting_rgb_kbd_connected())
 				return; // no keyboard
 
 			wooting_rgb_send_feature(Feature_Reset, 0, 0, 0, 0); // use profile colors
