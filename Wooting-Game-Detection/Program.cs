@@ -75,9 +75,6 @@ namespace Wooting_Game_Detection
 
 			int PreviousProfile = 0;
 
-			const int LayoutColumns = 21;
-			const int LayoutRows = 6;
-
 			SetConsoleCtrlHandler(ConsoleCtrlHandler, true); // reset on exit
 
 			var TitleBuffer = new StringBuilder(256);
