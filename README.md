@@ -12,3 +12,7 @@ I have worked to make the code as easy for anyone to use, you do not even need t
 ### 4. Run the Wooting-Game-Detection.exe
 (p.s it will run as a background process, at the present time it will take a restart of the process to restart the config.ini)
 
+
+
+##Requested features and planned features:
+A UI where you can assign profile numbers to games, change it on the fly.
