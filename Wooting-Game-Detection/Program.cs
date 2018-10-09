@@ -19,9 +19,6 @@ namespace Wooting_Game_Detection
 			int parameter2, int parameter3);
 
 		[DllImport("wootingrgb.dll")]
-		public static extern bool wooting_rgb_array_set_single(byte row, byte column, byte red, byte green, byte blue);
-
-		[DllImport("wootingrgb.dll")]
 		public static extern bool wooting_rgb_array_update_keyboard();
 
 		[DllImport("wootingrgb.dll")]
