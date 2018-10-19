@@ -19,5 +19,5 @@ A UI where you can assign profile numbers to games, change it on the fly.
 Fix the Chrome, Spotify or Discord name change bug.
 
 
-### KNWON BUGS
+### KNOWN BUGS
 1. Does not like Chrome, Spotify or Discord (due to name changes)
