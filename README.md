@@ -16,3 +16,8 @@ I have worked to make the code as easy for anyone to use, you do not even need t
 
 ## Requested features and planned features:
 A UI where you can assign profile numbers to games, change it on the fly.
+Fix the Chrome, Spotify or Discord name change bug.
+
+
+### KNWON BUGS
+1. Does not like Chrome, Spotify or Discord (due to name changes)
