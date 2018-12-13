@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -30,7 +31,10 @@ namespace Wooting_Game_Detection
 		[DllImport("user32.dll")]
 		private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
-		[DllImport("kernel32.dll")]
+        [DllImport("user32.dll")]
+        static extern uint GetWindowThreadProcessId(IntPtr hWnd, out IntPtr ProcessId);
+
+        [DllImport("kernel32.dll")]
 		public static extern bool SetConsoleCtrlHandler(HandlerRoutine Handler, bool State);
         
         [DllImport("kernel32.dll")]
@@ -93,6 +97,7 @@ namespace Wooting_Game_Detection
 			SetConsoleCtrlHandler(ConsoleCtrlHandler, true); // reset on exit
 
 			var TitleBuffer = new StringBuilder(256);
+            IntPtr ProcId = new IntPtr();
 			while (true)
 			{
 				Thread.Sleep(200);
@@ -100,10 +105,18 @@ namespace Wooting_Game_Detection
 				if (GetWindowText(GetForegroundWindow(), TitleBuffer, 256) == 0) // get foreground window's title
 					continue; // continue if the return value is 0, error
 
-				var Result = games.FirstOrDefault(x => x.Item1 == TitleBuffer.ToString()); // first object where the first item in a tuple equals to the window title
-				var DesiredProfile = Result?.Item2 ?? 0; // use the second item in a tuple as the desired profile, if result isn't null
+                GetWindowThreadProcessId(GetForegroundWindow(), out ProcId); // get processid of foreground window
+                if (ProcId == IntPtr.Zero)
+                    continue; // continue if the processid is 0 since that would be a service
 
-				if (DesiredProfile == PreviousProfile) continue; // do nothing, the profile shouldn't be changed
+                var Proc = Process.GetProcessById(ProcId.ToInt32()); // get the process by id
+                var ProcName = Path.GetFileNameWithoutExtension(Proc.MainModule.ModuleName).ToLower(); // get the executeable name of the process
+
+                var Result = games.FirstOrDefault(x => x.Item1.ToLower() == TitleBuffer.ToString().ToLower() || x.Item1.ToLower() == ProcName); // first object where the first item in a tuple equals to the window title or process executeable name
+
+                var DesiredProfile = Result?.Item2 ?? 0; // use the second item in a tuple as the desired profile, if result isn't null
+                
+                if (DesiredProfile == PreviousProfile) continue; // do nothing, the profile shouldn't be changed
 
 				Console.WriteLine($"Switch profile {DesiredProfile}");
 				wooting_rgb_send_feature(Feature_SwitchProfile, 0, 0, 0, DesiredProfile); // send the switch profile command to the keyboard
