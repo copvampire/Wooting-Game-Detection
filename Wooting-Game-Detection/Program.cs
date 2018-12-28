@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Wooting_Game_Detection
 {
-	class Program
+    class Program
 	{
-		[DllImport("wootingrgb.dll")]
+        [DllImport("wootingrgb.dll")]
 		public static extern bool wooting_rgb_kbd_connected();
 
 		[DllImport("wootingrgb.dll")]
@@ -43,9 +43,17 @@ namespace Wooting_Game_Detection
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr consoleWindow, int cmdShow);
 
+        [DllImport("user32.dll")]
+        static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc, WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
+
+        private const uint WINEVENT_OUTOFCONTEXT = 0;
+        private const uint EVENT_SYSTEM_FOREGROUND = 3;
+
         public delegate bool HandlerRoutine(CtrlTypes CtrlType);
 
-		public enum CtrlTypes
+        delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
+
+        public enum CtrlTypes
 		{
 			CTRL_C_EVENT = 0,
 			CTRL_BREAK_EVENT,
@@ -66,10 +74,19 @@ namespace Wooting_Game_Detection
 			return true;
 		}
 
-		static void Main(string[] args)
+        static StringBuilder TitleBuffer = new StringBuilder(256);
+        static IntPtr ProcId = new IntPtr();
+        static int PreviousProfile = 0;
+        static List<Tuple<string, int>> games = new List<Tuple<string, int>>();
+
+        static void Main(string[] args)
 		{
             
             Console.Title = "Wooting-Process-Detection";
+
+            WinEventDelegate dele = null;
+            dele = new WinEventDelegate(WinEventProc);
+            IntPtr m_hhook = SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, dele, 0, 0, 0);
 
             IntPtr consoleWindow = GetConsoleWindow();
 
@@ -85,45 +102,41 @@ namespace Wooting_Game_Detection
 
             var lines = File.ReadAllLines("config.ini");
 
-            List<Tuple<string, int>> games = new List<Tuple<string, int>>();
             foreach (var line in lines)
             {
                 var splitted = line.Split(',');
                 games.Add(new Tuple<string, int>(splitted[0], Convert.ToInt32(splitted[1])));
             }
 
-            int PreviousProfile = 0;
-
 			SetConsoleCtrlHandler(ConsoleCtrlHandler, true); // reset on exit
+            
+            Console.ReadKey();
+        }
 
-			var TitleBuffer = new StringBuilder(256);
-            IntPtr ProcId = new IntPtr();
-			while (true)
-			{
-				Thread.Sleep(200);
+        public static void WinEventProc(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
+        {
+            if (GetWindowText(GetForegroundWindow(), TitleBuffer, 256) == 0) // get foreground window's title
+                return; // return if the return value is 0, error
 
-				if (GetWindowText(GetForegroundWindow(), TitleBuffer, 256) == 0) // get foreground window's title
-					continue; // continue if the return value is 0, error
+            GetWindowThreadProcessId(GetForegroundWindow(), out ProcId); // get processid of foreground window
+            if (ProcId == IntPtr.Zero)
+                return; // return if the processid is 0 since that would be a service
 
-                GetWindowThreadProcessId(GetForegroundWindow(), out ProcId); // get processid of foreground window
-                if (ProcId == IntPtr.Zero)
-                    continue; // continue if the processid is 0 since that would be a service
+            var Proc = Process.GetProcessById(ProcId.ToInt32()); // get the process by id
+            var ProcName = Path.GetFileNameWithoutExtension(Proc.MainModule.ModuleName).ToLower(); // get the executeable name of the process
 
-                var Proc = Process.GetProcessById(ProcId.ToInt32()); // get the process by id
-                var ProcName = Path.GetFileNameWithoutExtension(Proc.MainModule.ModuleName).ToLower(); // get the executeable name of the process
+            var Result = games.FirstOrDefault(x => x.Item1.ToLower() == TitleBuffer.ToString().ToLower() || x.Item1.ToLower() == ProcName); // first object where the first item in a tuple equals to the window title or process executeable name
 
-                var Result = games.FirstOrDefault(x => x.Item1.ToLower() == TitleBuffer.ToString().ToLower() || x.Item1.ToLower() == ProcName); // first object where the first item in a tuple equals to the window title or process executeable name
+            var DesiredProfile = Result?.Item2 ?? 0; // use the second item in a tuple as the desired profile, if result isn't null
 
-                var DesiredProfile = Result?.Item2 ?? 0; // use the second item in a tuple as the desired profile, if result isn't null
-                
-                if (DesiredProfile == PreviousProfile) continue; // do nothing, the profile shouldn't be changed
+            if (DesiredProfile == PreviousProfile) return; // return, the profile shouldn't be changed
 
-				Console.WriteLine($"Switch profile {DesiredProfile}");
-				wooting_rgb_send_feature(Feature_SwitchProfile, 0, 0, 0, DesiredProfile); // send the switch profile command to the keyboard
-				wooting_rgb_send_feature(Feature_LoadRgbProfile, 0, 0, 0, DesiredProfile); // update colors on keyboard 
+            Console.WriteLine($"Switch profile {DesiredProfile}");
+            
+            wooting_rgb_send_feature(Feature_SwitchProfile, 0, 0, 0, DesiredProfile); // send the switch profile command to the keyboard
+            wooting_rgb_send_feature(Feature_LoadRgbProfile, 0, 0, 0, DesiredProfile); // update colors on keyboard 
 
-				PreviousProfile = DesiredProfile;
-			}
-		}
-	}
+            PreviousProfile = DesiredProfile;
+        }
+    }
 }
