@@ -9,15 +9,12 @@ I have worked to make the code as easy for anyone to use, you do not even need t
 ### 1. [Download the zip](https://github.com/copvampire/Wooting-Game-Detection/raw/master/Wooting-Game-Detection.zip)
 ### 2. Extract files
 ### 3. Edit the Config.ini to match what games need what profile
-### 4. Run the Wooting-Game-Detection.exe (To get it to load on startup, put a shortcut into the startup folder)
+### 4. Run the Wooting-Game-Detection.exe as Administrator (To get it to load on startup, put a shortcut into the startup folder)
 (p.s it will run as a background process, at the present time it will take a restart of the process to restart the config.ini)
 
 
 
 ## Requested features and planned features:
 A UI where you can assign profile numbers to games, change it on the fly.
-Fix the Chrome, Spotify or Discord name change bug.
 
 
-### KNOWN BUGS
-1. Does not like Chrome, Spotify or Discord (due to name changes)
