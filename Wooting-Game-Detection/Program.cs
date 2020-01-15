@@ -75,7 +75,7 @@ namespace Wooting_Game_Detection
 
             if (consoleWindow != IntPtr.Zero)
             {
-                //ShowWindow(consoleWindow, 0);
+                ShowWindow(consoleWindow, 0); //Hide console
             }
 
             if (!wooting_rgb_kbd_connected())
