@@ -16,7 +16,7 @@ namespace Wooting_Game_Detection
 		public static extern bool wooting_rgb_kbd_connected();
 
 		[DllImport("wootingrgb.dll")]
-		public static extern bool wooting_rgb_send_feature(int commandId, int parameter0, int parameter1,
+		public static extern bool wooting_usb_send_feature(int commandId, int parameter0, int parameter1,
 			int parameter2, int parameter3);
 
 		[DllImport("wootingrgb.dll")]
@@ -75,13 +75,13 @@ namespace Wooting_Game_Detection
 
             if (consoleWindow != IntPtr.Zero)
             {
-                ShowWindow(consoleWindow, 0);
+                //ShowWindow(consoleWindow, 0);
             }
 
             if (!wooting_rgb_kbd_connected())
 				return; // no keyboard
 
-			wooting_rgb_send_feature(Feature_Reset, 0, 0, 0, 0); // use profile colors
+			wooting_usb_send_feature(Feature_Reset, 0, 0, 0, 0); // use profile colors
 
             var lines = File.ReadAllLines("config.ini");
 
@@ -119,8 +119,8 @@ namespace Wooting_Game_Detection
                 if (DesiredProfile == PreviousProfile) continue; // do nothing, the profile shouldn't be changed
 
 				Console.WriteLine($"Switch profile {DesiredProfile}");
-				wooting_rgb_send_feature(Feature_SwitchProfile, 0, 0, 0, DesiredProfile); // send the switch profile command to the keyboard
-				wooting_rgb_send_feature(Feature_LoadRgbProfile, 0, 0, 0, DesiredProfile); // update colors on keyboard 
+				wooting_usb_send_feature(Feature_SwitchProfile, 0, 0, 0, DesiredProfile); // send the switch profile command to the keyboard
+				wooting_usb_send_feature(Feature_LoadRgbProfile, 0, 0, 0, DesiredProfile); // update colors on keyboard 
 
 				PreviousProfile = DesiredProfile;
 			}
