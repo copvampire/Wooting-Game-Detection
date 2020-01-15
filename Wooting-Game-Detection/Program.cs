@@ -71,20 +71,22 @@ namespace Wooting_Game_Detection
             
             Console.Title = "Wooting-Process-Detection";
 
-            IntPtr consoleWindow = GetConsoleWindow();
+			IntPtr consoleWindow = GetConsoleWindow();
 
             if (consoleWindow != IntPtr.Zero)
             {
-                ShowWindow(consoleWindow, 0); //Hide console
+                //ShowWindow(consoleWindow, 0); //Hide console
             }
 
-            if (!wooting_rgb_kbd_connected())
+			AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
+
+			if (!wooting_rgb_kbd_connected())
 				return; // no keyboard
 
 			wooting_usb_send_feature(Feature_Reset, 0, 0, 0, 0); // use profile colors
 
             var lines = File.ReadAllLines("config.ini");
-
+			
             List<Tuple<string, int>> games = new List<Tuple<string, int>>();
             foreach (var line in lines)
             {
@@ -125,5 +127,10 @@ namespace Wooting_Game_Detection
 				PreviousProfile = DesiredProfile;
 			}
 		}
+		static void OnProcessExit(object sender, EventArgs e)
+		{
+			wooting_rgb_reset();
+		}
+
 	}
 }
